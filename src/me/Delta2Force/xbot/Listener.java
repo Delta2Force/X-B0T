@@ -8,9 +8,22 @@ import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.entities.Message;
 import net.dv8tion.jda.entities.Role;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
 
 public class Listener extends ListenerAdapter{
+	@Override
+	//Just for the private x-help command
+	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
+		Message cmd = event.getMessage();
+		if(cmd.getRawContent().equals("x-help")){
+			//Create the Help String
+			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar** display your Avatar.\n**x-hello** Make me say Hello to you!";
+			//Send it
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\nX-B0T is made by Delta2Force");
+		}
+	}
+	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent e){
 		//Get the message
@@ -27,19 +40,26 @@ public class Listener extends ListenerAdapter{
 				}
 			}
 			//Create the Help String
-			String help = "**x-help** Show this!\n**x-ping** Pong.";
+			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar** Display your Avatar.\n**x-hello** Make me say Hello to you!";
 			//If they have Permission, show Commands for modifying Messages
 			if(permission){
 				help = help + "\n**x-clear** Clears the Chat.";
 			}
 			//Send it
-			cmd.getAuthor().getPrivateChannel().sendMessage(help);
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\nX-B0T is made by Delta2Force");
+		}
+		if(cmd.getRawContent().equals("x-hello")){
+			cmd.getChannel().sendMessage("x-Hello " + cmd.getAuthor().getAsMention() + "!");
 		}
 		if(cmd.getRawContent().equals("x-ping")){
 			//Show "Pong"
 			cmd.getChannel().sendMessage("**_Pong._**");
 		}
-		if(cmd.getRawContent().equals("x-clear")){
+		if(cmd.getRawContent().equals("x-avatar")){
+			//Print avatar
+			cmd.getChannel().sendMessage(cmd.getAuthor().getAvatarUrl());
+		}
+		if(cmd.getRawContent().equals("x-clear") && !cmd.isPrivate()){
 			//Clear the whole Chat of the Channel
 			//Get roles of user
 			List <Role> roles = e.getGuild().getRolesForUser(e.getAuthor());
