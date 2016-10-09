@@ -1,5 +1,7 @@
 package me.Delta2Force.xbot;
 
+import java.util.Scanner;
+
 import net.dv8tion.jda.JDA;
 import net.dv8tion.jda.JDABuilder;
 
