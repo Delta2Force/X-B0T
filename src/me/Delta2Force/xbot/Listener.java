@@ -21,7 +21,7 @@ public class Listener extends ListenerAdapter{
 			//Create the Help String
 			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.";
 			//Send it
-			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T/blob/master/src/me/Delta2Force/xbot/Listener.java");
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T");
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class Listener extends ListenerAdapter{
 			//Add the Tag Disclaimer
 			help = help + "\n\n_All created Tags get removed when the bot gets restarted._";
 			//Send it
-			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T/blob/master/src/me/Delta2Force/xbot/Listener.java");
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T");
 		}
 		if(cmd.getRawContent().equals("x-hello")){
 			cmd.getChannel().sendMessage("x-Hello " + cmd.getAuthor().getAsMention() + "!");
