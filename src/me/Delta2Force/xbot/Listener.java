@@ -19,7 +19,7 @@ public class Listener extends ListenerAdapter{
 		Message cmd = event.getMessage();
 		if(cmd.getRawContent().equals("x-help")){
 			//Create the Help String
-			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.";
+			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.\n**x-tag-edit** Edit a Tag.\n**x-tag-delete** Delete a Tag.";
 			//Send it
 			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T");
 		}
