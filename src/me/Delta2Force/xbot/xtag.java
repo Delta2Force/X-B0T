@@ -54,6 +54,37 @@ public class xtag {
 		tc.sendMessage(lol);
 	}
 	
+	public static void edit(String name, User author, MessageChannel mc, String newContent){
+		for(String x : tags.keySet()){
+			if(x.startsWith(name + ":°/°:")){
+				if(tags.get(x) != author){
+					mc.sendMessage("That Tag was not made by you.");
+				}else{
+					tags.remove(x);
+					tags.put(name + ":°/°:" + newContent, author);
+					mc.sendMessage("You successfully editted the Tag '" + name + "'!");
+				}
+			}else{
+				mc.sendMessage("That Tag doesnt exist!");
+			}
+		}
+	}
+	
+	public static void delete(String name, User author, MessageChannel mc){
+		for(String x : tags.keySet()){
+			if(x.startsWith(name + ":°/°:")){
+				if(tags.get(x) != author){
+					mc.sendMessage("That Tag was not made by you.");
+				}else{
+					tags.remove(x);
+					mc.sendMessage("You successfully removed the Tag '" + name + "'!");
+				}
+			}else{
+				mc.sendMessage("That Tag doesnt exist!");
+			}
+		}
+	}
+	
 	public static void get(String what, Message g){
 		boolean exists = false;
 		String lolo = "";

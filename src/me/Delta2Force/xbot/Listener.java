@@ -19,9 +19,9 @@ public class Listener extends ListenerAdapter{
 		Message cmd = event.getMessage();
 		if(cmd.getRawContent().equals("x-help")){
 			//Create the Help String
-			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar** display your Avatar.\n**x-hello** Make me say Hello to you!";
+			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.";
 			//Send it
-			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\nX-B0T is made by Delta2Force");
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T/blob/master/src/me/Delta2Force/xbot/Listener.java");
 		}
 	}
 	
@@ -41,11 +41,7 @@ public class Listener extends ListenerAdapter{
 				}
 			}
 			//Create the Help String
-<<<<<<< HEAD
-			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.";
-=======
-			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar** Display your Avatar.\n**x-hello** Make me say Hello to you!";
->>>>>>> origin/master
+			String help = "**x-help** Show this!\n**x-ping** Pong.\n**x-avatar [text]** Send your Avatar, optionally add Text.\n**x-tag-create <tag-name> <tag-content>** Create a Tag.\n**x-tag-use <tag-name>** Use a Tag.\n**x-tag-list** Show all of your Tags.\n**x-tag-edit** Edit a Tag.\n**x-tag-delete** Delete a Tag.";
 			//If they have Permission, show Commands for modifying Messages
 			if(permission){
 				help = help + "\n**x-clear** Clears the Chat.";
@@ -53,7 +49,7 @@ public class Listener extends ListenerAdapter{
 			//Add the Tag Disclaimer
 			help = help + "\n\n_All created Tags get removed when the bot gets restarted._";
 			//Send it
-			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\nX-B0T is made by Delta2Force");
+			cmd.getAuthor().getPrivateChannel().sendMessage(help + "\n\nX-B0T is Open-Source.\nhttps://github.com/Delta2Force/X-B0T/blob/master/src/me/Delta2Force/xbot/Listener.java");
 		}
 		if(cmd.getRawContent().equals("x-hello")){
 			cmd.getChannel().sendMessage("x-Hello " + cmd.getAuthor().getAsMention() + "!");
@@ -66,7 +62,6 @@ public class Listener extends ListenerAdapter{
 			//Show "Pong"
 			cmd.getChannel().sendMessage("**_Pong._**");
 		}
-<<<<<<< HEAD
 		if(cmd.getRawContent().startsWith("x-tag-create")){
 			//Try if the String can be splitted
 			try{
@@ -87,6 +82,42 @@ public class Listener extends ListenerAdapter{
 				cmd.getChannel().sendMessage("**x-tag-create <tag-name> <tag-content>**");
 			}
 		}
+		if(cmd.getRawContent().startsWith("x-tag-edit")){
+			//Try if the String can be splitted
+			try{
+				String ok = cmd.getRawContent().substring(11);
+				String[] okk = ok.split(" ");
+				//Get the name
+				String name = okk[0];
+				//Checking for errors again
+				String ecx = okk[1];
+				//Get the Content
+				String tagcontent = ok.replaceFirst(name + " ", "");
+				//Edit the Tag
+				xtag.edit(name, cmd.getAuthor(), cmd.getChannel(), tagcontent);
+				//And print a note to the Console
+				System.out.println(cmd.getAuthor().getUsername() + " editted the Tag '" + name + "'");
+			}catch(Exception exc){
+				//Else, display the usage
+				cmd.getChannel().sendMessage("**x-tag-edit <tag-name> <tag-content>**");
+			}
+		}
+		if(cmd.getRawContent().startsWith("x-tag-delete")){
+			//Try if the String can be splitted
+			try{
+				String ok = cmd.getRawContent().substring(13);
+				String[] okk = ok.split(" ");
+				//Get the name
+				String name = okk[0];
+				//Delete the Tag
+				xtag.delete(name, cmd.getAuthor(), cmd.getChannel());
+				//And print a note to the Console
+				System.out.println(cmd.getAuthor().getUsername() + " removed the Tag '" + name + "'");
+			}catch(Exception exc){
+				//Else, display the usage
+				cmd.getChannel().sendMessage("**x-tag-delete <tag-name>**");
+			}
+		}
 		if(cmd.getRawContent().startsWith("x-tag-use")){
 			//Try if the String can be splitted
 			try{
@@ -105,14 +136,11 @@ public class Listener extends ListenerAdapter{
 			//Run a function from XTAG
 			xtag.list(cmd.getChannel(), cmd.getAuthor());
 		}
-		if(cmd.getRawContent().equals("x-clear")){
-=======
 		if(cmd.getRawContent().equals("x-avatar")){
 			//Print avatar
 			cmd.getChannel().sendMessage(cmd.getAuthor().getAvatarUrl());
 		}
 		if(cmd.getRawContent().equals("x-clear") && !cmd.isPrivate()){
->>>>>>> origin/master
 			//Clear the whole Chat of the Channel
 			//Get roles of user
 			List <Role> roles = e.getGuild().getRolesForUser(e.getAuthor());
