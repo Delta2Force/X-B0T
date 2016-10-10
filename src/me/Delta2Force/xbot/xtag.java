@@ -44,6 +44,7 @@ public class xtag {
 	}
 	
 	public static void list(MessageChannel tc, User author){
+		Message m = tc.sendMessage("Collecting your Tags...");
 		String lol = "Tags owned by you:\n\n";
 		for(String x : tags.keySet()){
 			if(tags.get(x) == author){
@@ -51,41 +52,50 @@ public class xtag {
 				lol = lol + "**" + lal[0] + "**\n";
 			}
 		}
-		tc.sendMessage(lol);
+		m.updateMessage(lol);
 	}
 	
 	public static void edit(String name, User author, MessageChannel mc, String newContent){
+		Message m = mc.sendMessage("Searching for the Tag...");
+		boolean doesntexist = true;
 		for(String x : tags.keySet()){
 			if(x.startsWith(name + ":°/°:")){
+				doesntexist = false;
 				if(tags.get(x) != author){
-					mc.sendMessage("That Tag was not made by you.");
+					m.updateMessage("That Tag was not made by you.");
 				}else{
 					tags.remove(x);
 					tags.put(name + ":°/°:" + newContent, author);
-					mc.sendMessage("You successfully editted the Tag '" + name + "'!");
+					m.updateMessage("You successfully editted the Tag '" + name + "'!");
 				}
-			}else{
-				mc.sendMessage("That Tag doesnt exist!");
 			}
+		}
+		if(doesntexist){
+			m.updateMessage("Doesn't exist.");
 		}
 	}
 	
 	public static void delete(String name, User author, MessageChannel mc){
+		Message m = mc.sendMessage("Searching for the Tag...");
+		boolean doesntexist = true;
 		for(String x : tags.keySet()){
 			if(x.startsWith(name + ":°/°:")){
+				doesntexist = false;
 				if(tags.get(x) != author){
-					mc.sendMessage("That Tag was not made by you.");
+					m.updateMessage("That Tag was not made by you.");
 				}else{
 					tags.remove(x);
-					mc.sendMessage("You successfully removed the Tag '" + name + "'!");
+					m.updateMessage("You successfully removed the Tag '" + name + "'!");
 				}
-			}else{
-				mc.sendMessage("That Tag doesnt exist!");
 			}
+		}
+		if(doesntexist){
+			m.updateMessage("Doesn't exist.");
 		}
 	}
 	
 	public static void get(String what, Message g){
+		Message m = g.getChannel().sendMessage("Searching for the Tag...");
 		boolean exists = false;
 		String lolo = "";
 		for(String s : tags.keySet()){
@@ -96,10 +106,11 @@ public class xtag {
 			}
 		}
 		if(exists){
+			m.updateMessage("Tag exists. Running through X-Tag...");
 			String xd = parse(lolo, g);
-			g.getChannel().sendMessage(xd);
+			m.updateMessage(xd);
 		}else{
-			g.getChannel().sendMessage("This Tag doesn't exist.");
+			m.updateMessage("This Tag doesn't exist.");
 		}
 	}
 }
