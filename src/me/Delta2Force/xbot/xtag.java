@@ -23,6 +23,18 @@ public class xtag {
 			User random = msg.getJDA().getUsers().get(lol);
 			tagcontent = tagcontent.replace("%randommention%", random.getAsMention());
 		}
+		String[] weew = tagcontent.split(" ");
+		for(String x : weew){
+			if(x.startsWith("%random:")){
+				String splt = x.substring(8, x.length() - 1);
+				System.out.println(splt);
+				splt = splt.replace(".:.", " ");
+				String[] splta = splt.split("°°");
+				int lol = r.nextInt(splta.length - 1);
+				System.out.println(splta[lol]);
+				tagcontent = tagcontent.replace(x, splta[lol]);
+			}
+		}
 		return tagcontent;
 	}
 	
