@@ -79,7 +79,7 @@ public class Listener extends ListenerAdapter{
 				System.out.println(cmd.getAuthor().getUsername() + " created the Tag '" + name + "'");
 			}catch(Exception exc){
 				//Else, display the usage
-				cmd.getChannel().sendMessage("**x-tag-create <tag-name> <tag-content>**");
+				cmd.getChannel().sendMessage("Usage: `x-tag-create <tag-name> <tag-content>`");
 			}
 		}
 		if(cmd.getRawContent().startsWith("x-tag-edit")){
@@ -99,7 +99,7 @@ public class Listener extends ListenerAdapter{
 				System.out.println(cmd.getAuthor().getUsername() + " editted the Tag '" + name + "'");
 			}catch(Exception exc){
 				//Else, display the usage
-				cmd.getChannel().sendMessage("**x-tag-edit <tag-name> <tag-content>**");
+				cmd.getChannel().sendMessage("Usage: `x-tag-edit <tag-name> <tag-content>`");
 			}
 		}
 		if(cmd.getRawContent().startsWith("x-tag-delete")){
@@ -115,7 +115,7 @@ public class Listener extends ListenerAdapter{
 				System.out.println(cmd.getAuthor().getUsername() + " removed the Tag '" + name + "'");
 			}catch(Exception exc){
 				//Else, display the usage
-				cmd.getChannel().sendMessage("**x-tag-delete <tag-name>**");
+				cmd.getChannel().sendMessage("Usage: `x-tag-delete <tag-name>`");
 			}
 		}
 		if(cmd.getRawContent().startsWith("x-tag-use")){
@@ -129,7 +129,7 @@ public class Listener extends ListenerAdapter{
 				xtag.get(name, cmd);
 			}catch(Exception exc){
 				//Else, display the usage
-				cmd.getChannel().sendMessage("**x-tag-use <tag-name>**");
+				cmd.getChannel().sendMessage("Usage: `x-tag-use <tag-name>`");
 			}
 		}
 		if(cmd.getRawContent().equals("x-tag-list")){
